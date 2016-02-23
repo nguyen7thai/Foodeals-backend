@@ -10,7 +10,6 @@ gem 'pg'
 
 gem 'nokogiri'
 
-
 group :development, :test do
   gem 'byebug'
 end
@@ -21,5 +20,6 @@ end
 
 group :production do
   gem 'rails_12factor'
+  gem 'unicorn'
 end
 
