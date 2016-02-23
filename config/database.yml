@@ -1,0 +1,9 @@
+default: &default
+  adapter: postgresql
+  encoding: utf8
+
+development:
+  <<: *default
+  database: foodeals
+  timeout: 5000
+  username: bebe
