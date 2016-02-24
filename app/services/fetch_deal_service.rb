@@ -10,14 +10,15 @@ class FetchDealService
     page.css('#cate_list > li').each do |deal|
       title = deal.css('.list_name').text
       link = deal.css('.img > a').attribute('href').value
-      deal_page = Nokogiri::HTML(open("#{root_url}#{link}", "Cookie" => cookie_location))
+      abs_link = "#{root_url}#{link}"
+      deal_page = Nokogiri::HTML(open(abs_link, "Cookie" => cookie_location))
       locations = deal_page.css('.link_map')
       coordinate = nil
       if locations.present?
         p "items: #{deal_items.count}"
         coordinate = locations.first.attribute('data-map-location').value
         coordinate = coordinate.split(',')
-        deal_items << DealItem.new(title, link, nil, coordinate)
+        deal_items << DealItem.new(title, abs_link, nil, coordinate)
 
       else
         p "No coordinate: #{title}"
