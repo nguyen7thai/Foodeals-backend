@@ -13,15 +13,17 @@ class FetchDealService
       abs_link = "#{root_url}#{link}"
       deal_page = Nokogiri::HTML(open(abs_link, "Cookie" => cookie_location))
       locations = deal_page.css('.link_map')
+      evoucher = deal_page.xpath('//span[contains(text(), "(Email/SMS)")]')
       coordinate = nil
-      if locations.present?
+      if locations.empty?
+        p "No coordinate: #{title}"
+      elsif evoucher.empty?
+        p "No evoucher: #{title}"
+      else
         p "items: #{deal_items.count}"
         coordinate = locations.first.attribute('data-map-location').value
         coordinate = coordinate.split(',')
         deal_items << DealItem.new(title, abs_link, nil, coordinate)
-
-      else
-        p "No coordinate: #{title}"
       end
     end
     { deal_items: deal_items }
