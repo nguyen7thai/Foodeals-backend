@@ -15,6 +15,7 @@ class FetchDealService
       title = deal.css('.list_name').text
       link = deal.css('.img > a').attribute('href').value
       abs_link = "#{root_url}#{link}"
+      price = deal.css('.price').text
       deal_page = Nokogiri::HTML(open(abs_link))
       locations = deal_page.css('.link_map')
       evoucher = deal_page.xpath('//span[contains(text(), "(Email/SMS)")]')
@@ -27,7 +28,7 @@ class FetchDealService
         p "items: #{deal_items.count}"
         coordinate = locations.first.attribute('data-map-location').value
         coordinate = coordinate.split(',')
-        deal_items << DealItem.new(title, abs_link, nil, coordinate)
+        deal_items << DealItem.new(title, abs_link, nil, coordinate, price)
       end
     end
     deal_items
