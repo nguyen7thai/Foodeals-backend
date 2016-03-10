@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
-  # root 'welcome#index'
+  root 'home#index'
   resources :deal_items, only: [:index]
 end

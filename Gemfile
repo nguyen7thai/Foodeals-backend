@@ -10,6 +10,9 @@ gem 'pg'
 
 gem 'nokogiri'
 gem 'sucker_punch'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'slim'
 
 group :development, :test do
   gem 'byebug'
