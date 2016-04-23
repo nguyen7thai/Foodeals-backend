@@ -20,7 +20,7 @@ class FetchDealService
       locations = deal_page.css('.link_map')
       evoucher = deal_page.xpath('//span[contains(text(), "(Email/SMS)")]')
       coordinate = nil
-      if locations.empty?
+      if locations.empty? || locations.first.attribute('data-map-location').value.blank?
         p "No coordinate: #{title}"
       elsif evoucher.empty?
         p "No evoucher: #{title}"
